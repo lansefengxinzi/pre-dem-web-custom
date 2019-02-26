@@ -1,0 +1,27 @@
+{
+  "name": "pre-dem-web-custom",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "dist/pre-dem-web-custom.js",
+  "scripts": {
+    "clean": "rimraf build",
+    "check": "tslint -c ./tslint.json './src/**/*.ts*'",
+    "dev": "NODE_ENV=development && node --max_old_space_size=8000 node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.config.js --inline --progress --colors  --content-base --profile --display-modules build",
+    "build": "npm run clean && webpack --config webpack.config.js --profile --display-modules --progress --colors"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.24",
+    "awesome-typescript-loader": "^3.2.3",
+    "rimraf": "^2.5.3",
+    "source-map-loader": "^0.2.1",
+    "typescript": "^2.4.2",
+    "ava": "^0.20.0",
+    "webpack": "^3.5.5"
+  },
+  "keywords": [
+    "dem"
+  ],
+  "dependencies": {
+    "reqwest": "^2.0.5"
+  }
+}
