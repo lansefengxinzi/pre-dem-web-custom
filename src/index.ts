@@ -6,10 +6,6 @@ import {getCurrentScript} from "./utils"
 
     function PredemWebSdk() {
 
-        this.setTag = function (tag: string) {
-            predem.setTag(tag);
-        };
-
         this.sendEvent = function (eventName: string, eventData: string) {
             return predem.sendEvents([{eventName: eventName, eventData: eventData}]);
         };
@@ -18,11 +14,6 @@ import {getCurrentScript} from "./utils"
             return predem.sendEvents(events);
 
         };
-
-        this.setAppVersion = function (version: string) {
-            predem.setAppVersion(version);
-        };
-
     }
 
     win["predem"] = new PredemWebSdk();
@@ -52,21 +43,11 @@ class Predem {
             console.error("domain can not be null");
             return
         }
-        const tag = currentScript.getAttribute("data-tag");
         const appId = appKey.substring(0, APP_ID_LENGTH);
 
-        webData.setTag(tag);
         webData.init(appId, domain);
-    }
 
-    setTag(tag: string): void {
-        webData.setTag(tag);
     }
-
-    setAppVersion(version: string): void {
-        webData.setVersion(version);
-    }
-
 
     sendEvents(events: any[]): any {
         if (!(events instanceof Array)) {
@@ -87,6 +68,10 @@ class Predem {
         return webData.sendEventData(events);
 
     }
+
+
+
+
 
 }
 

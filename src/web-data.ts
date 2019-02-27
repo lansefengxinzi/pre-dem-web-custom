@@ -7,7 +7,7 @@ import * as reqwest from "reqwest";
 
 import {
     getCookier, setCookier, generateUUID
-    , localStorageIsSupported
+    , localStorageIsSupported,
 } from './utils'
 
 
@@ -18,9 +18,9 @@ const VERSION = packageJson.version;
 export class WebData {
     appId: string;
     domain: string;
-    tag: string;
     uuid: string;
     appVersion: string;
+    tag: string;
 
     constructor() {
         this.appId = "";
@@ -48,26 +48,24 @@ export class WebData {
             }
             this.uuid = predemUuid;
         }
+
+        if ('fetch' in _window) {
+            _window['_origin_fetch'] = _window.fetch
+        }
     }
 
     init(appId: string, domain: string): void {
         this.appId = appId;
         this.domain = domain;
-    }
 
-    setTag(tag: string): void {
-        this.tag = tag;
-    }
-
-    setVersion(version: string): void {
-        this.appVersion = version;
     }
 
     sendEventData(batchData: any[]): any {
         const url = `${this.domain}/v2/${this.appId}/custom-events`;
         let data = "";
+
         batchData.map((event: any) => {
-            const eventData = JSON.stringify(event.eventData);
+            const eventData = JSON.stringify(event.eventData)
             const eventstr = this.initCustomEvent(this.tag, event.eventName, eventData);
             data += JSON.stringify(eventstr) + "\n"
         });

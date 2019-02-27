@@ -10,6 +10,7 @@
     "build": "npm run clean && webpack --config webpack.config.js --profile --display-modules --progress --colors"
   },
   "devDependencies": {
+    "tracekit": "^0.4.5",
     "@types/node": "^8.0.24",
     "awesome-typescript-loader": "^3.2.3",
     "rimraf": "^2.5.3",
@@ -19,8 +20,13 @@
     "webpack": "^3.5.5"
   },
   "keywords": [
+    "exceptions",
+    "debugging",
+    "logging",
+    "errors",
     "dem"
   ],
+  "types": "types/dem.d.ts",
   "dependencies": {
     "reqwest": "^2.0.5"
   }
